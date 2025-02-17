@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AvatarModel {
+struct AvatarModel: Hashable {
     
     let avartarId: String
     let name: String?
