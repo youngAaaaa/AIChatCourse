@@ -26,6 +26,7 @@ struct OnboardingCompletedView: View {
                 .fontWeight(.medium)
                 .foregroundStyle(.secondary)
         }
+        .frame(maxHeight: .infinity)
         .safeAreaInset(edge: .bottom, content: {
             ctaButton
         })
@@ -34,19 +35,17 @@ struct OnboardingCompletedView: View {
     }
     
     private var ctaButton: some View {
-        Button {
-            // finish onboarding and endter app!
-            onFinishButtonPressed()
-        } label: {
-            ZStack {
-                if isCompletingProfileSetup {
-                    ProgressView()
-                        .tint(.white)
-                } else {
-                    Text("Finish")
-                }
+        ZStack {
+            if isCompletingProfileSetup {
+                ProgressView()
+                    .tint(.white)
+            } else {
+                Text("Finish")
             }
-            .callToActionButton()
+        }
+        .callToActionButton()
+        .anyButton(.press) {
+            onFinishButtonPressed()
         }
         .disabled(isCompletingProfileSetup)
     }
